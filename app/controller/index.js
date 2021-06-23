@@ -1,4 +1,4 @@
-const { sendError, sendSuccess } = require("./Controller");
+const { sendError, sendSuccess } = require("./controller");
 const {getAllProvinces, getDistricts, getVillages} = require("../services/index.services")
 
 const handleGetProvinces = async (req, res, next) => {
