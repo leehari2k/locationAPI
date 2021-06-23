@@ -8,5 +8,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", router);
-
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/public/index.html");
+  });
 app.listen(PORT, () => console.log(`Listen on port ${PORT}`));
