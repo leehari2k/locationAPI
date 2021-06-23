@@ -5,6 +5,6 @@
   },
   "hosting": {
     "site": "location-vn",
-    "public": "public"
+    "public": "./public"
   }
 }
