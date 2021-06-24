@@ -1,6 +1,5 @@
 const { sendError, sendSuccess } = require("./controller");
-const {getAllProvinces, getDistricts, getVillages} = require("../services/index.services")
-
+const {getAllProvinces, getDistricts, getVillages, getProvince} = require("../services/index.services")
 const handleGetProvinces = async (req, res, next) => {
   try {
     const result = await getAllProvinces()
@@ -39,8 +38,21 @@ const handleGetVillage = async (req, res, next) => {
   }
 }
 
+const handleTest = async (req, res, next) => {
+  try {
+    const result = await getProvince()
+    if (result.success) {
+      return sendSuccess(res, result.data, result.message, result.status)
+    }
+    return sendError(res, result.message, result.status)
+  } catch (error) {
+    return sendError(res, error.message, error.status)
+  }
+}
+
 module.exports = {
   handleGetProvinces,
   handleGetDistrict,
   handleGetVillage,
+  handleTest
 }

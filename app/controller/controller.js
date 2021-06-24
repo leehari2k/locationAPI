@@ -1,10 +1,7 @@
 const { HTTP_STATUS_CODE } = require("../common/constant");
 
 const sendSuccess = (res, data = {}, message, status) => {
-  return res.status(status).json({
-    message: message || "success",
-    data: data,
-  });
+  return res.status(status).json(data);
 };
 
 const sendError = (

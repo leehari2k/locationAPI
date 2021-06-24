@@ -1,5 +1,6 @@
 const { HTTP_STATUS_CODE } = require("../common/constant");
-const db = require("../common/firebase.config");
+const {firestore, database} = require("../common/firebase.config");
+const db = database
 const getAllProvinces = async () => {
   try {
     const provinceRef = db.collection("Provinces");
@@ -96,8 +97,42 @@ const getVillages = async (ID) => {
       }
   }
 };
+
+const getProvince = async () => {
+  try {
+    const ref = await db.ref('/province');
+    let obj = {}
+    // Attach an asynchronous callback to read the data at our posts reference
+    ref.on('value', (snapshot) => {
+      //console.log(snapshot.val());
+      obj = snapshot.val()
+    }, (errorObject) => {
+      //console.log('The read failed: ' + errorObject.name);
+      obj = {}
+    });
+    if (obj == {})
+      return {
+        message: "Failed",
+        success: false,
+        status: HTTP_STATUS_CODE.NOT_FOUND
+      }
+    return {
+      message: "Get province successfully",
+      data: obj,
+      status: HTTP_STATUS_CODE.OK,
+      success: true,
+    };
+  } catch (error) {
+    return {
+      message: error.message,
+      status: error.status,
+      success: false,
+    }
+  }
+}
 module.exports = {
   getAllProvinces,
   getDistricts,
   getVillages,
+  getProvince,
 };
