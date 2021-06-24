@@ -100,28 +100,24 @@ const getVillages = async (ID) => {
 
 const getProvince = async () => {
   try {
-    const ref = await db.ref('/province');
-    let obj = {}
+    const ref = db.ref('/province');
     // Attach an asynchronous callback to read the data at our posts reference
-    ref.on('value', (snapshot) => {
-      //console.log(snapshot.val());
-      obj = snapshot.val()
-    }, (errorObject) => {
-      //console.log('The read failed: ' + errorObject.name);
-      obj = {}
-    });
-    if (obj == {})
+    return ref.once('value').then((snapshot) => {
+      console.log(snapshot.val());
+      const obj = snapshot.val()
       return {
-        message: "Failed",
-        success: false,
-        status: HTTP_STATUS_CODE.NOT_FOUND
-      }
-    return {
-      message: "Get province successfully",
-      data: obj,
-      status: HTTP_STATUS_CODE.OK,
-      success: true,
-    };
+        message: "Get province successfully",
+        data: obj,
+        status: HTTP_STATUS_CODE.OK,
+        success: true,
+      }}).catch((errorObject) => {
+          //console.log('The read failed: ' + errorObject.name);
+          return {
+            message: 'The read failed: ' + errorObject.name,
+            success: false,
+            status: HTTP_STATUS_CODE.NOT_FOUND
+          }
+        });
   } catch (error) {
     return {
       message: error.message,
@@ -130,6 +126,7 @@ const getProvince = async () => {
     }
   }
 }
+
 module.exports = {
   getAllProvinces,
   getDistricts,
