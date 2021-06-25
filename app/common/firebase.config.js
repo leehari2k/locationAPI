@@ -10,7 +10,6 @@ const {
   DATABASE_URL,
 } = require("./config");
 
-require("firebase/auth");
 require("firebase/database");
 
 const firebaseConfig = {

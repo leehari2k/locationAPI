@@ -1,4 +1,4 @@
-exports.HTTP_STATUS_CODE = {
+module.exports.HTTP_STATUS_CODE = {
     CREATE: 201,
     OK: 200,
     BAD_REQUEST: 400,
@@ -8,5 +8,11 @@ exports.HTTP_STATUS_CODE = {
     REQUEST_TIMEOUT: 408,
     INTERNAL_SERVER_ERROR: 500,
     UNPROCESSABLE_ENTITY: 422,
-  };
+};
+
+module.exports.DEFAULT_ROUTER = {
+  GET_PROVINCE: "/province",
+  GET_DISTRICT: "/province/:ID/district",
+  GET_VILLAGE: "/district/:ID/village",
+}
   

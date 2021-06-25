@@ -5,8 +5,15 @@ const {
   handleGetDistrict,
   handleGetVillage,
 } = require("../controller/index");
-router.route("/province").get(handleGetProvince);
-router.route("/province/:ID/district").get(handleGetDistrict);
-router.route("/district/:ID/village").get(handleGetVillage);
+const { validateParam, schemas } = require("../middleware/validate");
+const { DEFAULT_ROUTER } = require("../common/constant");
+
+router.route(DEFAULT_ROUTER.GET_PROVINCE).get(handleGetProvince);
+router
+  .route(DEFAULT_ROUTER.GET_DISTRICT)
+  .get(validateParam(schemas.idProvince), handleGetDistrict);
+router
+  .route(DEFAULT_ROUTER.GET_VILLAGE)
+  .get(validateParam(schemas.idDistrict), handleGetVillage);
 
 module.exports = router;

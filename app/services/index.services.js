@@ -5,7 +5,6 @@ const db = database;
 const getProvince = () => {
   try {
     const ref = db.ref("/province");
-    // Attach an asynchronous callback to read the data at our posts reference
     return ref
       .once("value")
       .then((snapshot) => {
@@ -39,7 +38,6 @@ const getProvince = () => {
 const getDistrict = (parent_code) => {
   try {
     const ref = db.ref("/district");
-    // Attach an asynchronous callback to read the data at our posts reference
     return ref
       .once("value")
       .then((snapshot) => {
@@ -81,7 +79,6 @@ const getDistrict = (parent_code) => {
 const getVillage = (parent_code) => {
   try {
     const ref = db.ref("/village");
-    // Attach an asynchronous callback to read the data at our posts reference
     return ref
       .once("value")
       .then((snapshot) => {
